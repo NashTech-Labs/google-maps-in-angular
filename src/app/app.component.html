@@ -1,21 +1,13 @@
 <h2>Google Maps in Angular</h2>
-<agm-map
-  [latitude]="centerLatitude"
-  [longitude]="centerLongitude"
-  [zoom]="zoom"
-  [disableDefaultUI]="false"
->
-  <agm-marker
-    *ngFor="let marker of markers; let i = index"
-    [latitude]="marker.latitude"
-    [longitude]="marker.longitude"
-    [label]="marker.label"
-    [markerDraggable]=false
-  >
-    <agm-info-window>
-      <div>
-        <strong>{{marker.place}}</strong>
-      </div>
-    </agm-info-window>
-  </agm-marker>
-</agm-map>
+<google-map height="500px"
+            width="1000px"
+            [center]="center"
+            [zoom]="zoom"
+            >
+  <map-marker #marker="mapMarker"
+              *ngFor="let markerPosition of markers;"
+              [position]="markerPosition"
+              (mapClick)="openMarkerWindow(marker)">
+  </map-marker>
+  <map-info-window>Marker Info Window</map-info-window>
+</google-map>

@@ -1,11 +1,5 @@
-import { Component } from '@angular/core';
-
-interface MapMarker {
-	latitude: number;
-	longitude: number;
-	label: string;
-  place: string;
-}
+import { Component, ViewChild } from '@angular/core';
+import { MapAnchorPoint, MapInfoWindow } from '@angular/google-maps';
 
 @Component({
   selector: 'app-root',
@@ -14,33 +8,34 @@ interface MapMarker {
 })
 export class AppComponent {
   title = 'maps-in-angular';
-  zoom: number = 5;
-  centerLatitude: number = 23.173939;
-  centerLongitude: number = 81.565125;
-  markers: MapMarker[] = [
-	  {
-		  latitude: 28.679079,
-		  longitude: 77.069710,
-		  label: 'DL',
-      place: 'Delhi'
+  @ViewChild(MapInfoWindow) markerWindow: MapInfoWindow | undefined;
+  center: google.maps.LatLngLiteral = {
+      lat: 23,
+      lng: 81
+  };
+  markers: google.maps.LatLngLiteral[] = [
+    {
+		  lat: 28.679079,
+		  lng: 77.069710,
 	  },
 	  {
-		  latitude: 	30.525005,
-		  longitude: 75.890121,
-		  label: 'PB',
-      place: 'Punjab'
-	  },
-	  {
-		  latitude: 24.794500,
-		  longitude: 73.055000,
-		  label: 'RJ',
-      place: 'Rajasthan'
+		  lat: 	30.525005,
+		  lng: 75.890121,
 	  },
     {
-      latitude: 26.850000,
-      longitude: 80.949997,
-      label: 'LW',
-      place: 'Lucknow'
+      lat: 24.794500,
+      lng: 73.055000,
+    },
+    {
+      lat: 26.850000,
+      lng: 80.949997,
     }
-  ]
+  ];
+  zoom = 5;
+  
+  openMarkerWindow(marker: MapAnchorPoint) {
+      if (this.markerWindow != undefined){
+        this.markerWindow.open(marker);
+      }
+  }
 }

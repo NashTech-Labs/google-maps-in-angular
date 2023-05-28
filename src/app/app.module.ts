@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -12,10 +12,7 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({
-      //Please add your own google maps API key
-      apiKey: ''
-    })
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
